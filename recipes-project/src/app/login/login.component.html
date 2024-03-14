@@ -1,0 +1,46 @@
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <form>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">שם משתמש</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="pi pi-user"></i></span>
+                            <input type="text" class="form-control" id="username" #usernameInput placeholder="שם משתמש">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">סיסמה</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="pi pi-lock"></i></span>
+                            <input type="password" class="form-control" id="password" #passwordInput placeholder="סיסמה">
+                        </div>
+                    </div>
+                    <button (click)="handleLogin(usernameInput.value, passwordInput.value)" type="button" class="btn btn-primary">שלח</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div> -->
+<div class="login-container">
+  <h2>Login</h2>
+  <form>
+    <div class="form-group">
+      <label for="username">שם משתמש</label>
+      <div class="input-container">
+        <input type="text" class="form-control" id="username" #usernameInput placeholder="הזן שם משתמש">
+        <i class="pi pi-user"></i> <!-- אייקון משתמש -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">סיסמה</label>
+      <div class="input-container">
+        <input type="password" class="form-control" id="password" #passwordInput placeholder="הזן סיסמה">
+        <i class="pi pi-lock"></i> <!-- אייקון מנעול -->
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="handleLogin(usernameInput.value, passwordInput.value)">התחבר</button>
+  </form>
+</div>

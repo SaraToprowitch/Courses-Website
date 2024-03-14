@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-6">
+          <div class="card p-4">
+              <form>
+                  <div class="mb-3">
+                      <label for="username" class="form-label">שם משתמש</label>
+                      <div class="input-group">
+                          <span class="input-group-text"><i class="pi pi-user"></i></span>
+                          <input type="text" class="form-control" id="username" #usernameInput placeholder="שם משתמש">
+                      </div>
+                  </div>
+                  <div class="mb-3">
+                      <label for="password" class="form-label">סיסמה</label>
+                      <div class="input-group">
+                          <span class="input-group-text"><i class="pi pi-lock"></i></span>
+                          <input type="password" class="form-control" id="password" #passwordInput placeholder="סיסמה">
+                      </div>
+                  </div>
+                  <button (click)="handleLogout()" type="button"  class="btn btn-danger">התנתק</button>
+                  <button (click)="closeAccount(usernameInput.value, passwordInput.value)" type="button"  class="btn btn-danger">סגירת חשבון</button>
+
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+

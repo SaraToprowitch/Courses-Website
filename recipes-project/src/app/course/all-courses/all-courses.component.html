@@ -1,0 +1,29 @@
+
+  <div class="filters-container">
+    <div class="filters">
+    <label class="bold-label"  for="courseName"> Course name:</label>
+    <select class="form-select" id="courseName" (change)="filterCourses('courseName', $event)">
+      <option value="">כל האפשרויות</option>
+      <option *ngFor="let course of allCourses" [value]="course.name">{{ course.name }}</option>
+    </select>
+    <br>
+    <label class="bold-label"  courseName> Learning Way:</label>
+    <select  class="form-select" id="learningWay" (change)="filterCourses('learningWay', $event)">
+      <option value="">כל האפשרויות</option>
+      <option value="0">ZOOM</option>
+      <option value="1">FRONTAL</option>
+    </select>
+    <br>
+    <label class="bold-label"  for="courseName">Categories :</label>
+    <select class="form-select" id="categoryId" (change)="filterCourses('categoryId', $event)">
+      <option value="">כל הקטגוריות</option>
+      <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+  </div>
+    <div class="courses-container">
+      <div *ngFor="let course of filteredProductsList" class="course"  (click)="showDetails(course)">
+        <app-course-details [course]="course" [showLimitedDetails]="true"></app-course-details>
+      </div>
+    </div>
+  
+  

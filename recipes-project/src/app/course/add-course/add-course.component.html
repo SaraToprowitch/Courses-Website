@@ -1,0 +1,38 @@
+<form [formGroup]="addForm">
+  <div class="form-container">
+    <label>שם הקורס:</label>
+    <input type="text" class="input-field" formControlName="name" />
+  
+    <label>קטגוריה:</label>
+<select class="input-field" formControlName="categoryId">
+  <option *ngFor="let category of categories | async" [value]="category.id">{{ category.name }}</option>
+</select>
+
+  
+    <label>מספר השיעורים:</label>
+    <input type="number" class="input-field" formControlName="countLessons" required/>
+  
+    <label>מספר המרצה:</label>
+    <input type="number" class="input-field" formControlName="speacherId" required/>
+  
+    <label>אופן הלמידה:</label>
+<select class="input-field" formControlName="learningWay" required>
+  <option *ngFor="let way of learningWays" [value]="way">{{ way }}</option>
+</select>
+    <label>תאריך התחלה:</label>
+    <input type="date" class="input-field" formControlName="beginningDate" />
+  
+    <label>תמונה:</label>
+    <input type="text" class="input-field" formControlName="image" />
+
+    <div *ngFor="let silibus of newCourse.silibus; let i = index">
+      <label>נושא השיעור {{ i + 1 }}:</label>
+      <input type="text" [value]="silibus" class="input-field" (keyup)="handleSilibuInput($event, i)"/>
+      <button type="button" (click)="removeSilibusField(i)" class="remove-btn">הסר</button>
+    </div>
+  
+    <button type="button"  (click)="addSilibusField()" class="add-btn">הוסף נושא שיעור נוסף</button>
+    
+    <button type="button" (click)="saveCourse()" class="save-btn">שמור קורס</button>
+  </div>
+</form>

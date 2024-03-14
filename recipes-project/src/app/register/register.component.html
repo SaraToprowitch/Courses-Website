@@ -1,0 +1,86 @@
+<!-- <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-4">
+        <form [formGroup]="registerForm" (submit)="submitForm()">
+          <div class="mb-3">
+            <label for="username" class="form-label">שם משתמש</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="pi pi-user"></i></span>
+              <input type="text" class="form-control" id="username" formControlName="username" placeholder="שם משתמש" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">מייל</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="pi pi-envelope"></i></span>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="מייל" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">כתובת</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="pi pi-map-marker"></i></span>
+              <input type="text" class="form-control" id="address" formControlName="address" placeholder="כתובת" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">סיסמה</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="pi pi-lock"></i></span>
+              <input type="password" class="form-control" id="password" formControlName="password" placeholder="סיסמה" required>
+            </div>
+          </div>
+          <button type="button" (click)="IsLecturer()" class="btn btn-secondary">speacher?</button>
+          <div *ngIf="isLecturer" class="mb-3">
+            <label for="course" class="form-label">קורס</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="pi pi-book"></i></span>
+              <input type="text" class="form-control" id="course" formControlName="course" placeholder="קורס" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">שלח</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+<form [formGroup]="registerForm" (submit)="submitForm()">
+  <div class="login-container">
+    <h2>Sign in</h2>
+    <div class="form-group">
+      <label for="username">שם משתמש</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="username" formControlName="username" placeholder="שם משתמש" required>
+        <i class="pi pi-user"></i> <!-- אייקון משתמש -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">מייל</label>
+      <div class="input-group">
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="מייל" required>
+        <i class="pi pi-envelope"></i> <!-- אייקון דואר אלקטרוני -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address">כתובת</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="address" formControlName="address" placeholder="כתובת" required>
+        <i class="pi pi-home"></i> <!-- אייקון כתובת -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">סיסמה</label>
+      <div class="input-group">
+        <input type="password" class="form-control" id="password" formControlName="password" placeholder="סיסמה" required>
+        <i class="pi pi-lock"></i> <!-- אייקון מנעול -->
+      </div>
+    </div>
+    <button type="button" (click)="IsLecturer()">speacher?</button>
+    <br>
+    <div class="input-group">
+      <input type="text" *ngIf="isLecturer" class="form-control" id="course" formControlName="course" placeholder="קורס" required>
+    </div>
+    <button type="submit">submit</button>
+  </div>
+</form>

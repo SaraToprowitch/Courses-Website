@@ -1,0 +1,31 @@
+
+
+.custom-link {
+  color: #2b1c7c ;/* צבע שחור */
+   text-decoration: none; /* מונע קו תחתון קישור */
+   position: relative; /* מוסיף מיקום יחסי לקישור */
+ }
+
+ .custom-link::after {
+   content: ''; /* תוספת תוכן ריק לפני הטקסט */
+   position: absolute; /* מוסיף מיקום יחסי לקו */
+   width: 100%; /* רוחב הקו */
+   height: 2px; /* גובה הקו */
+   background-color: #ccc; /* צבע הקו בהיר */
+   bottom: -2px; /* מקם את הקו מתחת לטקסט */
+   left: 0; /* מקם את הקו בתחילת הטקסט */
+   transition: background-color 0.3s; /* הוספת אנימציה לצבע הקו */
+ }
+
+ .custom-link:hover::after, .custom-link:focus::after {
+   background-color: #666; /* צבע הקו הכהה בעת מעבר העכבר */
+ }
+
+ .custom-link:hover, .custom-link:focus {
+   color: rgb(77, 188, 231); /* צבע ורוד למצב ה-HOVER */
+ }
+
+ .custom-icon {
+   color: black; /* צבע שחור לאייקונים */
+ }
+
