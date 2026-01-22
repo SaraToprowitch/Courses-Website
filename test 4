@@ -1,0 +1,107 @@
+נניח שיש לך קובץ data.json בתיקיית assets:
+
+[
+  { "id": 1, "name": "Sarah", "role": "Full Stack Developer", "email": "s0534107064@gmail.com" },
+  { "id": 2, "name": "Aaron", "role": "Backend Developer", "email": "aaron@example.com" },
+  { "id": 3, "name": "Yael", "role": "UI/UX Designer", "email": "yael@example.com" }
+]
+
+2️⃣ שירות לקריאת JSON
+
+data.service.ts:
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface Person {
+  id: number;
+  name: string;
+  role: string;
+  email: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class DataService {
+  constructor(private http: HttpClient) {}
+
+  getPeople(): Observable<Person[]> {
+    return this.http.get<Person[]>('assets/data.json');
+  }
+}
+
+3️⃣ קומפוננטה לטבלה עם בחירה
+
+table.component.ts:
+
+import { Component, OnInit } from '@angular/core';
+import { DataService, Person } from '../services/data.service';
+
+@Component({
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
+})
+export class TableComponent implements OnInit {
+  people: Person[] = [];
+  selectedPerson?: Person;
+
+  constructor(private dataService: DataService) {}
+
+  ngOnInit(): void {
+    this.dataService.getPeople().subscribe(data => this.people = data);
+  }
+
+  selectPerson(person: Person) {
+    this.selectedPerson = person;
+  }
+}
+
+4️⃣ תבנית HTML
+
+table.component.html:
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of people" (click)="selectPerson(person)" [class.active]="person === selectedPerson">
+      <td>{{ person.id }}</td>
+      <td>{{ person.name }}</td>
+      <td>{{ person.role }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="details" *ngIf="selectedPerson">
+  <h3>Details:</h3>
+  <p><strong>ID:</strong> {{ selectedPerson.id }}</p>
+  <p><strong>Name:</strong> {{ selectedPerson.name }}</p>
+  <p><strong>Role:</strong> {{ selectedPerson.role }}</p>
+  <p><strong>Email:</strong> {{ selectedPerson.email }}</p>
+</div>
+
+5️⃣ סגנון SCSS (Optional)
+tr.active {
+  background-color: #e0e8ff;
+}
+
+.details {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+✅ איך זה עובד:
+
+הטבלה מוצגת עם שורות מ־JSON.
+
+לחיצה על שורה קוראת ל־selectPerson(person) ושומרת את הפרט הנבחר ב־selectedPerson.
+
+מתחת לטבלה מופיעים הפרטים של השורה שנבחרה עם *ngIf.
