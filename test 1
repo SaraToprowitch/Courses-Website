@@ -1,0 +1,215 @@
+# Angular Exam Cheat Sheet (Angular 17–19)
+Author: Sarah Adler
+
+====================================
+BASICS
+====================================
+
+## Component
+יחידת UI בסיסית.
+
+```ts
+@Component({
+  selector: 'app-header',
+  standalone: true,
+  imports: [],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss'
+})
+export class HeaderComponent {}
+Standalone Components (חדשני)
+✔ אין AppModule
+✔ כל קומפוננטה מנהלת את ה-imports שלה
+
+ts
+Copy code
+standalone: true,
+imports: [NgClass, NgStyle]
+Binding (מאוד חשוב)
+Property: [value]
+
+Event: (click)
+
+Two-way: [(ngModel)]
+
+html
+Copy code
+<img [src]="imgUrl">
+<button (click)="save()">Save</button>
+<input [(ngModel)]="name">
+====================================
+DIRECTIVES (חדש וישן)
+ngClass
+html
+Copy code
+<div [ngClass]="{ active: isActive }"></div>
+ngStyle
+html
+Copy code
+<div [ngStyle]="{ 'background-image': 'url(' + img + ')' }"></div>
+@if (חדש – מחליף *ngIf)
+html
+Copy code
+@if (isLoggedIn) {
+  <p>Welcome</p>
+}
+@for (חדש – מחליף *ngFor)
+html
+Copy code
+@for (item of items; track item.id) {
+  <div>{{ item.name }}</div>
+}
+====================================
+COMPONENT COMMUNICATION
+Parent → Child (@Input)
+ts
+Copy code
+@Input() title!: string;
+html
+Copy code
+<app-child [title]="'Hello'"></app-child>
+Child → Parent (EventEmitter)
+ts
+Copy code
+@Output() closed = new EventEmitter<void>();
+this.closed.emit();
+html
+Copy code
+<app-child (closed)="onClose()"></app-child>
+Service Communication (מומלץ היום)
+ts
+Copy code
+@Injectable({ providedIn: 'root' })
+export class DataService {
+  data$ = new BehaviorSubject<string>('init');
+}
+====================================
+OBSERVABLES & RXJS
+Observable
+זרם נתונים אסינכרוני.
+
+ts
+Copy code
+users$: Observable<User[]>;
+async pipe (מומלץ)
+html
+Copy code
+<div *ngIf="users$ | async as users">
+  {{ users.length }}
+</div>
+Operators נפוצים
+ts
+Copy code
+map, filter, tap, switchMap
+====================================
+FORMS
+Reactive Forms
+ts
+Copy code
+form = new FormGroup({
+  name: new FormControl(''),
+  email: new FormControl('')
+});
+patchValue
+עדכון חלקי של טופס
+
+ts
+Copy code
+this.form.patchValue({ name: 'Sarah' });
+====================================
+ROUTING
+Router Navigate
+ts
+Copy code
+this.router.navigate(['/home']);
+Route Params
+ts
+Copy code
+this.route.params.subscribe(p => p['id']);
+Query Params
+ts
+Copy code
+this.route.queryParams.subscribe(q => q['token']);
+====================================
+HTTP
+HttpClient
+ts
+Copy code
+this.http.get<User[]>('/api/users');
+this.http.post('/api/save', data);
+====================================
+ANGULAR MATERIAL (Angular 19)
+✔ לא צריך MaterialModule
+✔ מייבאים לקומפוננטה
+
+ts
+Copy code
+imports: [MatButtonModule, MatIconModule]
+html
+Copy code
+<button mat-mini-fab>
+  <mat-icon>menu</mat-icon>
+</button>
+====================================
+STYLING
+BEM (מקובל ועדכני)
+lua
+Copy code
+.block {}
+.block__element {}
+.block--modifier {}
+SCSS טיפ חשוב
+scss
+Copy code
+left: -9px; // חובה יחידה!
+====================================
+ICONS
+Font Awesome
+להוסיף פעם אחת ב־index.html:
+
+html
+Copy code
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+Devicon (טכנולוגיות)
+html
+Copy code
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+שימוש:
+
+html
+Copy code
+<i class="devicon-angularjs-plain colored"></i>
+====================================
+COMMON MISTAKES (נופלים במבחן!)
+❌ import מ־node_modules ידנית
+✔ תמיד:
+
+ts
+Copy code
+import { NgClass } from '@angular/common';
+❌ left בלי px
+❌ mat-Mini-Fab (שגוי)
+✔ mat-mini-fab
+
+❌ לשים <link> בתוך HTML של קומפוננטה
+✔ רק ב־index.html
+
+====================================
+EXAM TIPS
+✔ Standalone > Modules
+✔ @if / @for > *ngIf / *ngFor
+✔ async pipe > subscribe ידני
+✔ Services להעברת מידע
+✔ קוד ברור ופשוט
+
+====================================
+ALLOWED SEARCH DURING EXAM (לא AI)
+https://angular.dev
+
+https://angular.dev/api
+
+https://stackoverflow.com
+
+https://developer.mozilla.org
+
+https://rxjs.dev
