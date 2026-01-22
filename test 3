@@ -1,0 +1,74 @@
+Angular / TypeScript – JSON & XML Cheat Sheet
+1️⃣ JSON
+מבנה JSON לדוגמה
+{
+  "name": "Sarah",
+  "age": 25
+}
+
+קריאה מ־JSON לקוד
+import data from './data.json';
+
+console.log(data.name); // Sarah
+console.log(data.age);  // 25
+
+מחרוזת JSON → אובייקט
+const jsonString = '{"name":"Sarah","age":25}';
+const obj = JSON.parse(jsonString);
+
+console.log(obj.name); // Sarah
+
+אובייקט → JSON
+const jsonStr = JSON.stringify(obj);
+console.log(jsonStr); // '{"name":"Sarah","age":25}'
+
+2️⃣ XML
+דוגמה ל־XML
+<person>
+  <name>Sarah</name>
+  <age>25</age>
+</person>
+
+המרה ל־JS עם DOMParser
+const xmlString = `
+<person>
+  <name>Sarah</name>
+  <age>25</age>
+</person>
+`;
+
+const parser = new DOMParser();
+const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
+
+const name = xmlDoc.getElementsByTagName('name')[0].textContent;
+const age = xmlDoc.getElementsByTagName('age')[0].textContent;
+
+console.log(name); // Sarah
+console.log(age);  // 25
+
+המרה ל־JS עם ספריית xml2js
+npm install xml2js
+
+import { parseString } from 'xml2js';
+
+const xml = `<person><name>Sarah</name><age>25</age></person>`;
+
+parseString(xml, { explicitArray: false }, (err, result) => {
+  if(err) console.error(err);
+  else {
+    console.log(result.person.name); // Sarah
+    console.log(result.person.age);  // 25
+  }
+});
+
+3️⃣ טיפים חשובים
+
+JSON → JS: JSON.parse()
+
+JS → JSON: JSON.stringify()
+
+XML → JS: DOMParser או ספרייה כמו xml2js
+
+Angular יכולה לקרוא קבצי JSON ישירות (import data from './data.json') עם resolveJsonModule: true ב־tsconfig
+
+אם שולחים XML ל־API → מומלץ להמיר ל־JSON קודם
