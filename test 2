@@ -1,0 +1,203 @@
+# Angular Cheat Sheet – Exam & Daily Use (Angular 17–19)
+
+A compact reference with definitions + short code examples.
+
+---
+
+## A – Async Pipe
+Handles Observable subscriptions automatically.
+
+```html
+<div>{{ users$ | async }}</div>
+B – Binding
+Connects TS and HTML.
+
+html
+Copy code
+<!-- Property -->
+<img [src]="imageUrl">
+
+<!-- Event -->
+<button (click)="save()">Save</button>
+
+<!-- Two-way -->
+<input [(ngModel)]="name">
+C – Component
+Basic UI building block.
+
+ts
+Copy code
+@Component({
+  selector: 'app-header',
+  standalone: true,
+  templateUrl: './header.component.html'
+})
+export class HeaderComponent {}
+D – Directive
+Adds behavior to elements.
+
+html
+Copy code
+<div [ngClass]="{ active: isActive }"></div>
+Types:
+
+Structural: @if, @for
+
+Attribute: ngClass, ngStyle
+
+E – EventEmitter
+Child → Parent communication.
+
+ts
+Copy code
+@Output() closed = new EventEmitter<void>();
+this.closed.emit();
+F – FormControl
+Reactive form field.
+
+ts
+Copy code
+name = new FormControl('');
+G – Guard
+Protects routes.
+
+ts
+Copy code
+canActivate(): boolean {
+  return this.auth.isLoggedIn();
+}
+H – HttpClient
+API calls.
+
+ts
+Copy code
+this.http.get<User[]>('/api/users');
+I – @Input
+Parent → Child communication.
+
+ts
+Copy code
+@Input() title!: string;
+J – JSON
+Common API data format.
+
+json
+Copy code
+{ "name": "Sarah", "role": "Developer" }
+L – Lazy Loading
+Loads routes only when needed.
+
+ts
+Copy code
+loadChildren: () =>
+  import('./admin/admin.routes').then(m => m.ADMIN_ROUTES)
+M – Module (Legacy)
+Used before standalone components.
+
+ts
+Copy code
+@NgModule({
+  declarations: [],
+  imports: []
+})
+N – ngClass
+Dynamic CSS classes.
+
+html
+Copy code
+<div [ngClass]="{ open: isOpen }"></div>
+O – Observable
+Async data stream (RxJS).
+
+ts
+Copy code
+users$: Observable<User[]>;
+P – Pipe
+Transforms data in templates.
+
+html
+Copy code
+{{ today | date:'short' }}
+Q – Query Params
+Read URL parameters.
+
+ts
+Copy code
+this.route.queryParams.subscribe(params => {
+  console.log(params['id']);
+});
+R – Router
+Navigation.
+
+ts
+Copy code
+this.router.navigate(['/home']);
+S – Standalone Component (Modern Angular)
+No NgModule needed.
+
+ts
+Copy code
+@Component({
+  standalone: true,
+  imports: [NgClass]
+})
+T – Template
+HTML of a component.
+
+html
+Copy code
+<h1>{{ title }}</h1>
+U – @if / @for (New Syntax)
+Modern structural directives.
+
+html
+Copy code
+@if (isLoggedIn) {
+  <p>Welcome</p>
+}
+
+@for (item of items; track item.id) {
+  <div>{{ item.name }}</div>
+}
+V – ViewChild
+Access DOM or component instance.
+
+ts
+Copy code
+@ViewChild('input') input!: ElementRef;
+W – Two-Way Binding
+Keeps data synced.
+
+html
+Copy code
+<input [(ngModel)]="email">
+X – RxJS Operators
+Handle streams.
+
+ts
+Copy code
+this.users$
+  .pipe(map(users => users.length))
+  .subscribe();
+Z – Zone.js
+Angular change detection engine (internal).
+
+Quick Notes for Exams
+Prefer standalone components
+
+Use binding syntax ([] ())
+
+Use @if / @for instead of *ngIf
+
+Use Observable + async pipe
+
+Simple & clear > clever
+
+Useful Docs (Non-AI)
+https://angular.dev
+
+https://angular.dev/api
+
+https://stackoverflow.com
+
+https://developer.mozilla.org
